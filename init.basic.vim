@@ -14,7 +14,6 @@ endif
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
   Plug 'octol/vim-cpp-enhanced-highlight'
-  Plug 'vim-syntastic/syntastic'
   Plug 'rhysd/vim-clang-format'
 call plug#end()
 
@@ -35,15 +34,6 @@ set smarttab autoindent expandtab
 " Enable autocompletion:
 set wildmenu
 set wildmode=longest,list
-
-"-----------------------------------------------------------------------------
-" syntastic configuration
-
-let g:syntastic_cpp_checkers = ['cpplint']
-let g:syntastic_c_checkers = ['cpplint']
-let g:syntastic_cpp_cpplint_exec = 'cpplint'
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 "-----------------------------------------------------------------------------
 " clang_format configuration

@@ -11,7 +11,6 @@ endif
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
   Plug 'octol/vim-cpp-enhanced-highlight'
-  Plug 'vim-syntastic/syntastic'
   Plug 'rhysd/vim-clang-format'
   Plug 'scrooloose/nerdtree'
   Plug 'ayu-theme/ayu-vim'
@@ -56,15 +55,6 @@ map <C-l> <C-w>l
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
-
-"-----------------------------------------------------------------------------
-" syntastic configuration
-
-let g:syntastic_cpp_checkers = ['cpplint']
-let g:syntastic_c_checkers = ['cpplint']
-let g:syntastic_cpp_cpplint_exec = 'cpplint'
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 "-----------------------------------------------------------------------------
 " clang_format configuration
