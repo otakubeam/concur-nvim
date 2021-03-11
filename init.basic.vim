@@ -4,6 +4,11 @@ if !filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoloa
   silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
   silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
   autocmd VimEnter * PlugInstall
+
+  " Put coc-settings.json into config directory.
+  silent !curl "https://raw.githubusercontent.com/otakubeam/concur-nvim/master/coc-settings.json" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/coc-settings.json
+  " Run intall command to get it working
+  autocmd VimEnter * CocInstall
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))

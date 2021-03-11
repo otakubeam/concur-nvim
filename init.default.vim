@@ -3,7 +3,9 @@ if !filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoloa
   echo "Downloading junegunn/vim-plug to manage plugins..."
   silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
   silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+  silent !curl "https://raw.githubusercontent.com/otakubeam/concur-nvim/master/coc-settings.json" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/coc-settings.json
   autocmd VimEnter * PlugInstall
+  autocmd VimEnter * CocInstall
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
