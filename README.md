@@ -8,15 +8,13 @@
 ![goto-example](https://raw.githubusercontent.com/otakubeam/concur-nvim/master/gifs/godefinition.gif)
 ### Show all references to symbol
 ![goref-example](https://raw.githubusercontent.com/otakubeam/concur-nvim/master/gifs/goreference.gif)
-### Auto-format on write
-![autoformat-example](https://raw.githubusercontent.com/otakubeam/concur-nvim/master/gifs/clangformat.gif)
 
 
 ## Мотивация
 * Clion работает нестабильно и медленно, активно кушает батарейку
 * Разработка идёт в контейнере, независимо от хост-системы
 * Vim имеет широчайшие возможности для кастомизации
-* Vim -- *свободное* программное обеспечение
+* Vim --- *свободное* программное обеспечение
 
 ## Основные возможности:
 * Перемещение с помощью `gd` (defenition), `gr` (refereces), `gi` (implementation)
@@ -97,5 +95,5 @@ $ cd /workspace/tinyfibers && cmake .
 Теперь в `/workspace/tinyfibers` лежит файл `compile_commands.json`.
 В общем случае он может находиться в другом месте. Тогда его нужно найти и слинковать:
 ```
-$ ln -s project/build-dir/compile_commands.json /project/compile_commands.json
+$ ln -s project/build-dir/compile_commands.json project/compile_commands.json
 ```
