@@ -10,12 +10,22 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
   Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-  Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'rhysd/vim-clang-format'
+
+  Plug 'easymotion/vim-easymotion'
+  Plug 'jiangmiao/auto-pairs'
+
   Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'airblade/vim-gitgutter'
+
+  Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'ayu-theme/ayu-vim'
   Plug 'bling/vim-airline'
 call plug#end()
+
+" Delimitmate fix
+imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Plug>delimitMateCR"
 
 " Some basics:
 nnoremap c "_c
@@ -36,6 +46,19 @@ set termguicolors
 let ayucolor="mirage"
 colorscheme ayu
 
+" Explicitly show spaces and tabs
+" set listchars+=space:·,trail:·
+" set list
+
+" Save file as sudo on files that require root permission
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" Replace all is aliased to S.
+nnoremap S :%s//g<Left><Left>
+
+" Go to prev buffer is aliased to E (only works once)
+nnoremap E :e#
+
 " Enable autocompletion:
 set wildmenu
 set wildmode=longest,list
@@ -55,6 +78,21 @@ map <C-l> <C-w>l
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow splitright
+
+"-----------------------------------------------------------------------------
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'Mod',
+                \ 'Staged'    :'Stg',
+                \ 'Untracked' :'Ntr',
+                \ 'Renamed'   :'Rnm',
+                \ 'Unmerged'  :'Nmr',
+                \ 'Deleted'   :'Del',
+                \ 'Dirty'     :'Drt',
+                \ 'Ignored'   :'Ign',
+                \ 'Clean'     :'Cln',
+                \ 'Unknown'   :'?',
+                \ }
 
 "-----------------------------------------------------------------------------
 " clang_format configuration
@@ -87,7 +125,7 @@ set nowritebackup
 set cmdheight=2
 
 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+set updatetime=250
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
@@ -137,14 +175,10 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
