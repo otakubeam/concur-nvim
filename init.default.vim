@@ -15,14 +15,20 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
   Plug 'easymotion/vim-easymotion'
   Plug 'jiangmiao/auto-pairs'
 
+  Plug 'voldikss/vim-floaterm'
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'airblade/vim-gitgutter'
-
+  
   Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'ayu-theme/ayu-vim'
   Plug 'bling/vim-airline'
 call plug#end()
+
+let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_keymap_prev   = '<F8>'
+let g:floaterm_keymap_next   = '<F9>'
+let g:floaterm_keymap_toggle = '<F12>'
 
 " Delimitmate fix
 imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<Plug>delimitMateCR"
@@ -43,8 +49,13 @@ set hlsearch
 
 " Enable true colors support
 set termguicolors
-let ayucolor="mirage"
+let ayucolor="dark"
 colorscheme ayu
+
+map <leader><leader>. <Plug>(easymotion-repeat)
+map <leader><leader>f <Plug>(easymotion-overwin-f2)
+map <leader><leader>l <Plug>(easymotion-overwin-line)
+map <leader><leader>w <Plug>(easymotion-overwin-w)
 
 " Explicitly show spaces and tabs
 " set listchars+=space:·,trail:·
@@ -56,7 +67,7 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " Replace all is aliased to S.
 nnoremap S :%s//g<Left><Left>
 
-" Go to prev buffer is aliased to E (only works once)
+" Go to prev buffer is aliased to E
 nnoremap E :e#
 
 " Enable autocompletion:
@@ -69,6 +80,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Nerd tree
 map <leader>n :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeWinSize=20
 
 " Shortcutting split navigation, saving a keypress:
 map <C-h> <C-w>h
