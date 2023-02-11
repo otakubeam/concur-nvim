@@ -45,9 +45,18 @@
 * __curl__ -- для загрузки конфигов
 * __npm, yarn__ -- как зависимости [Coc](https://github.com/neoclide/coc.nvim)
 * [__ccls__](https://github.com/MaskRay/ccls) -- сервер *language server protocol* для умного автодополнения, перехода по символам и прочего взамодействия с кодом.
+
 ```
-# apt install neovim curl npm ccls
-# npm install -g yarn
+apt install neovim curl ccls
+```
+
+Install nodejs:
+
+```
+curl -sL install-node.vercel.app/lts | bash
+
+curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+npm install -g yarn
 ```
 
 ---
