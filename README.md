@@ -32,10 +32,11 @@
 
 Внутри контейнера обновить софт
 ```
-# apt update && apt upgrade
+apt update && apt upgrade
 ```
 
-**Optional:** подключить тестовый репозиторий для получения последних версий.
+Подключить PPA для получения последних версий neovim.
+
 ```
 # apt install software-properties-common
 # add-apt-repository ppa:neovim-ppa/unstable
@@ -43,44 +44,46 @@
 \
 Устанавливаем софт:
 * __curl__ -- для загрузки конфигов
-* __npm, yarn__ -- как зависимости [Coc](https://github.com/neoclide/coc.nvim)
+* __nodejs__ -- как зависимости [Coc](https://github.com/neoclide/coc.nvim)
 * [__ccls__](https://github.com/MaskRay/ccls) -- сервер *language server protocol* для умного автодополнения, перехода по символам и прочего взамодействия с кодом.
 
 ```
 apt install neovim curl ccls
 ```
 
-Install nodejs:
+Install `nodejs`:
 
 ```
 curl -sL install-node.vercel.app/lts | bash
-
-curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-npm install -g yarn
 ```
 
 ---
 
 \
 Дальнейшие действия выполнять от имени юзера, через скрипт `login`
+
 ## Конфиг
+
 #### Минимальная конфигурация
 Для работы автодополнения, линтера, подсветки, форматирования. На случай, если вы хотите интегрировать изменения в свой `.vimrc`  -- [**init.basic.vim**](https://raw.githubusercontent.com/otakubeam/concur-nvim/master/init.basic.vim)
 
 #### Моя конфигурация
 Если вы не попадаете под предыдущий случай. На выходе получаем полностью рабочее окружение.
 **Осторожно:** файл `init.vim` будет перезаписан.
+
 ```
-$ curl -fLo ~/.config/nvim/init.vim --create-dirs https://raw.githubusercontent.com/otakubeam/concur-nvim/master/init.default.vim
+curl -fLo ~/.config/nvim/init.vim --create-dirs https://raw.githubusercontent.com/otakubeam/concur-nvim/master/init.default.vim
 ```
 
 ---
 
-Линкуем вывод cmake (clippy cmake) для работы ccls
+Линкуем вывод cmake (clippy cmake) для работы **ccls**.
+
 ```
-$ cd /workspace/concurrency-course
-$ ln -s build/Debug/compile_commands.json ./compile_commands.json
+cd /workspace/concurrency-course
+cp /tmp/clippy-build/Debug/compile_commands.json .
 ```
+
 Теперь всё должно работать.
 
 ---
@@ -89,20 +92,4 @@ $ ln -s build/Debug/compile_commands.json ./compile_commands.json
 Для новых проектов нужно:
 1) добавить строчку `set(CMAKE_EXPORT_COMPILE_COMMANDS ON)` в cmake-файле
 2) сгенерировать make-файлы
-3) слинковать файл `compile_commands.json` из build-директории с аналогичным файлом в корне проекта
-
-### Пример: репозиторий [tinyfibers](https://gitlab.com/Lipovsky/tinyfibers)
-Из контейнера:
-```
-$ cd /workspace
-$ git clone https://gitlab.com/Lipovsky/tinyfibers.git
-```
-Затем в файле `tinyfibers/cmake/CompileOptions.cmake` добавим строчку `set(CMAKE_EXPORT_COMPILE_COMMANDS ON)` и сгенерируем make-файлы:
-```
-$ cd /workspace/tinyfibers && cmake .
-```
-Теперь в `/workspace/tinyfibers` лежит файл `compile_commands.json`.
-В общем случае он может находиться в другом месте. Тогда его нужно найти и слинковать:
-```
-$ ln -s project/build-dir/compile_commands.json project/compile_commands.json
-```
+3) Перенести `compile_commands.json` из build-директории в корень проекта
