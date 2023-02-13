@@ -38,8 +38,8 @@ apt update && apt upgrade
 Подключить PPA для получения последних версий neovim.
 
 ```
-# apt install software-properties-common
-# add-apt-repository ppa:neovim-ppa/unstable
+apt install software-properties-common
+add-apt-repository ppa:neovim-ppa/unstable
 ```
 \
 Устанавливаем софт:
